@@ -18,18 +18,20 @@ function toAtString (string) {
 
 //Clicks taging automation
 //Link example: <a href="#" at-data-name="mylink" at-data-type="exit">My link</a>
+function sendClick (e) {
+  var clickName = e.target.getAttribute("at-data-name");
+  var clickType = e.target.getAttribute("at-data-type") || "navigation";
+  return tag.click.send({elem: this, level2: "1", name: clickName, type: clickType});
+}
 
-if ($(this).attr("at-data-name") !== null) {
+var el = document.querySelectorAll('[at-data-name]');
 
-  $(this).click(function (e) {
-    var clickName = $(this).attr("at-data-name");
-    var clickType = $(this).attr("at-data-type") || "navigation";
-    return tag.click.send({elem: $(this)[0], name: clickName, type: clickType});
-  });
+for (var i = 0; i < el.length; i++) {
+  el[i].addEventListener("click", sendClick, false);
 }
 
 //Social buttons taging
-function eventHandler(e) {
+function eventHandler (e) {
     if (e.data.service == "facebook_like") { //facebook_like: class of the link
         tag.click.send({elem:this, name: "pageName", level2: "level2", type: "action", chapter1: "chapter1", chapter2: "chapter2", chapter3: "facebook"});
     }
@@ -47,7 +49,7 @@ DASHBOARD APP
 ************************/
 
 //Convert Dashboard text into another, integrate between <script>...</script> in a text box
-function replaceElem(input, output, tag) {
+function replaceElem (input, output, tag) {
   var array = document.getElementsByTagName(tag);
   var re = new RegExp(input);
 
@@ -56,6 +58,6 @@ function replaceElem(input, output, tag) {
   }
 }
 
-setTimeout(function(){
+setTimeout(function (){
   replaceElem("oldElem", "newElem", "span");
 }, 1000);
