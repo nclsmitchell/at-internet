@@ -6,8 +6,7 @@ Useful JavaScript elements dedicated to the AT Internet solutions
 - toAtString (string):
 Convert string to string without spaces or special characters
 
-- Clicks taging automation for a link with the following format:
-<a href="#" at-data-name="mylink" at-data-type="exit">My link</a>
+- Clicks taging automation
 
 - Referrer forcing
 
